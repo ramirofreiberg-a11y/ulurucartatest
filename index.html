@@ -1,0 +1,1577 @@
+<!DOCTYPE html>
+<html lang="es"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ULURU - Menú Consciente</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&amp;family=Plus+Jakarta+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+    <style>
+        /* Variables de Diseño - Paleta Orgánica de Uluru */
+        :root {
+            --bg-color: #F7F6F2;      /* Gris claro Uluru */
+            --primary-color: #A05737;  /* Ladrillo Uluru */
+            --accent-color: #D7C6AA;   /* Tierra claro Uluru */
+            --text-dark: #2F2E2C;      /* Gris oscuro Uluru */
+            --text-muted: #625851;
+            --border-light: #EFE9E2;
+            --white: #FFFFFF;
+        }
+
+        /* Estilos Base */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+            line-height: 1.6;
+            padding-bottom: 80px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 24px;
+        }
+
+        /* Header de la Carta */
+        header {
+            text-align: center;
+            padding: 30px 20px 40px 20px;
+            border-bottom: 1px dashed var(--accent-color);
+            margin-bottom: 40px;
+        }
+
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 15px;
+            min-height: 90px;
+        }
+
+        .brand-logo-img {
+            max-height: 110px;
+            max-width: 100%;
+            height: auto;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .brand-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 800;
+            letter-spacing: 0.15em;
+            color: var(--primary-color);
+            text-transform: uppercase;
+        }
+
+        .brand-subtitle {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            color: var(--accent-color);
+            text-transform: uppercase;
+            margin-bottom: 24px;
+        }
+
+        .brand-description {
+            max-width: 600px;
+            margin: 0 auto;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+            font-style: italic;
+        }
+
+        /* Navegación rápida por Categorías */
+        .category-nav {
+            display: flex;
+            overflow-x: auto;
+            gap: 12px;
+            padding: 10px 0;
+            margin-bottom: 40px;
+            border-bottom: 1px solid var(--border-light);
+            scrollbar-width: none; /* Firefox */
+        }
+        
+        .category-nav::-webkit-scrollbar {
+            display: none; /* Chrome/Safari */
+        }
+
+        .nav-btn {
+            background-color: var(--white);
+            border: 1px solid var(--border-light);
+            color: var(--text-dark);
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            white-space: nowrap;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+
+        .nav-btn:hover, .nav-btn.active {
+            background-color: var(--primary-color);
+            color: var(--white);
+            border-color: var(--primary-color);
+        }
+
+        /* Bloques de Categorías */
+        .category-section {
+            margin-bottom: 50px;
+            scroll-margin-top: 20px;
+        }
+
+        .category-intro-text {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+            font-style: italic;
+            margin-bottom: 20px;
+            padding: 18px;
+            background-color: var(--white);
+            border-left: 3px solid var(--primary-color);
+            border-radius: 0 8px 8px 0;
+            box-shadow: 0 2px 8px rgba(160, 87, 55, 0.04);
+        }
+
+        .category-header {
+            margin-bottom: 24px;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 8px;
+        }
+
+        .category-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+
+        /* Grilla de Ítems */
+        .items-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 24px;
+        }
+
+        @media (min-width: 768px) {
+            .items-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        /* Tarjeta de Plato / Bebida */
+        .item-card {
+            background-color: var(--white);
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid var(--border-light);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            box-shadow: 0 2px 8px rgba(43, 76, 63, 0.03);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .item-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(43, 76, 63, 0.06);
+        }
+
+        .item-main {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 12px;
+        }
+
+        .item-img-container {
+            width: 70px;
+            height: 70px;
+            flex-shrink: 0;
+            border-radius: 8px;
+            overflow: hidden;
+            background-color: var(--bg-color);
+            border: 1px solid var(--border-light);
+        }
+
+        .item-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .item-details {
+            flex-grow: 1;
+        }
+
+        .item-title-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .item-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        .item-price {
+            font-weight: 700;
+            color: var(--primary-color);
+            font-size: 1.1rem;
+            white-space: nowrap;
+        }
+
+        .item-description {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            margin-top: 6px;
+            line-height: 1.5;
+        }
+
+        /* Badges de Tipo de Alimento */
+        .badges {
+            display: flex;
+            gap: 6px;
+            margin-top: 8px;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 4px;
+            letter-spacing: 0.05em;
+        }
+
+        .badge-sg {
+            background-color: #FDF2E9;
+            color: #D35400;
+            border: 1px solid #FADBD8;
+        }
+
+        .badge-vg {
+            background-color: #E8F8F5;
+            color: #117A65;
+            border: 1px solid #D1F2EB;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--border-light);
+            margin-top: 60px;
+        }
+
+        /* PANEL DE EDICIÓN */
+        #editor-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--primary-color);
+            color: var(--white);
+            border: none;
+            padding: 12px 20px;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: transform 0.2s;
+        }
+
+        #editor-toggle:hover {
+            transform: scale(1.05);
+        }
+
+        #editor-panel {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 100%;
+            max-width: 500px;
+            height: 100%;
+            background: #1E1E1E;
+            color: #ECECEC;
+            z-index: 1001;
+            box-shadow: -5px 0 25px rgba(0,0,0,0.3);
+            transition: right 0.4s cubic-bezier(0.05, 0.74, 0.2, 0.99);
+            display: flex;
+            flex-direction: column;
+        }
+
+        #editor-panel.open {
+            right: 0;
+        }
+
+        .editor-header {
+            padding: 20px;
+            background: #252526;
+            border-bottom: 1px solid #3C3C3C;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .editor-header h3 {
+            font-family: sans-serif;
+            font-size: 1.1rem;
+            color: #4CAF50;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            color: #AAA;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .editor-body {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .editor-instructions {
+            font-size: 0.8rem;
+            color: #AAA;
+            line-height: 1.4;
+        }
+
+        #json-textarea {
+            width: 100%;
+            flex-grow: 1;
+            background: #2D2D2D;
+            color: #9CDCFE;
+            border: 1px solid #3C3C3C;
+            border-radius: 6px;
+            padding: 12px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.85rem;
+            resize: none;
+        }
+
+        #json-textarea:focus {
+            outline: 1px solid #4CAF50;
+        }
+
+        .editor-footer {
+            padding: 20px;
+            background: #252526;
+            border-top: 1px solid #3C3C3C;
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-action {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 0.85rem;
+        }
+
+        .btn-apply {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .btn-download {
+            background-color: #007ACC;
+            color: white;
+        }
+
+        /* Notificación Toast */
+        #toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: #333;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            z-index: 1005;
+            transition: transform 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        #toast.show {
+            transform: translateX(-50%) translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Botón flotante para abrir el editor rápido (Se auto-elimina en la descarga) -->
+    
+
+    <!-- Panel de Edición Lateral (Se auto-elimina en la descarga) -->
+    
+
+    <!-- Contenido Principal Renderizado Dinámicamente -->
+    <div class="container">
+        <header id="main-header">
+                <div class="logo-container">
+                    <img src="logo-uluru.png" alt="ULURU Logo" class="brand-logo-img" onerror="this.style.display='none'; document.getElementById('brand-text-fallback').style.display='block';">
+                    <div id="brand-text-fallback" class="brand-logo" style="display:none;">ULURU</div>
+                </div>
+                <div class="brand-subtitle">CAFÉ &amp; COCINA CONSCIENTE</div>
+                <p class="brand-description">ULURU es más que un café: es un estilo de vida basado en el equilibrio, el respeto y las elecciones conscientes. Inspirados en la naturaleza y sus orígenes, trabajamos con ingredientes nobles: huevos de gallinas libres, fermentos vivos, harinas con valor nutricional y productos sin azúcares añadidos ni aceites inflamatorios.</p>
+            </header>
+
+        <nav class="category-nav" id="cat-nav"><button class="nav-btn active">Combos</button><button class="nav-btn ">Café Solo</button><button class="nav-btn ">Café con Leche</button><button class="nav-btn ">Café Frío</button><button class="nav-btn ">Slow Bar &amp; Degustación</button><button class="nav-btn ">Otras Infusiones</button><button class="nav-btn ">Pastelería &amp; Laminados</button><button class="nav-btn ">Tostones &amp; Platos Salados</button></nav>
+
+        <main id="menu-content"><section class="category-section" id="combos">
+                    
+                    <div class="category-header">
+                        <h2 class="category-title">Combos</h2>
+                    </div>
+                    <div class="items-grid">
+                        
+                        <div class="item-card">
+                            <div class="item-main">
+                                <div class="item-img-container" style="display: none;"><img class="item-img" src="https://images.unsplash.com/photo-1533089860891-a7c6f0a88666?auto=format&amp;fit=crop&amp;w=150&amp;q=80" alt="Clásico de Campo" onerror="this.parentElement.style.display='none'"></div>
+                                <div class="item-details">
+                                    <div class="item-title-row">
+                                        <h4 class="item-title">Clásico de Campo</h4>
+                                        <span class="item-price">$11.000</span>
+                                    </div>
+                                    <p class="item-description">Infusión + tostadas con manteca o queso crema y mermelada casera o dulce de leche.</p>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <div class="item-card">
+                            <div class="item-main">
+                                <div class="item-img-container"><img class="item-img" src="https://images.unsplash.com/photo-1607958996333-41aef7caefaa?auto=format&amp;fit=crop&amp;w=150&amp;q=80" alt="Gulero" onerror="this.parentElement.style.display='none'"></div>
+                                <div class="item-details">
+                                    <div class="item-title-row">
+                                        <h4 class="item-title">Gulero</h4>
+                                        <span class="item-price">$11.000</span>
+                                    </div>
+                                    <p class="item-description">Infusión + budín de pastelería consciente a elección.</p>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <div class="item-card">
+                            <div class="item-main">
+                                <div class="item-img-container"><img class="item-img" src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&amp;fit=crop&amp;w=150&amp;q=80" alt="Argento" onerror="this.parentElement.style.display='none'"></div>
+                                <div class="item-details">
+                                    <div class="item-title-row">
+                                        <h4 class="item-title">Argento</h4>
+                                        <span class="item-price">$11.500</span>
+                                    </div>
+                                    <p class="item-description">Infusión + dos medialunas de masa madre premium.</p>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <div class="item-card">
+                            <div class="item-main">
+                                <div class="item-img-container"><img class="item-img" src="https://images.unsplash.com/photo-1541532713592-79a0317b6b77?auto=format&amp;fit=crop&amp;w=150&amp;q=80" alt="Ulurense" onerror="this.parentElement.style.display='none'"></div>
+                                <div class="item-details">
+                                    <div class="item-title-row">
+                                        <h4 class="item-title">Ulurense</h4>
+                                        <span class="item-price">$17.000</span>
+                                    </div>
+                                    <p class="item-description">Infusión + tostón de palta fresca y huevo de campo.</p>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    
+                    </div>
+                </section><section class="category-section" id="cafe-solo">
+                    <p class="category-intro-text">Seleccionamos uno de los mejores tostadores de café de Argentina y lo preparamos cuidadosamente para que cada taza exprese su verdadero carácter. Te invitamos a probarlo sin endulzar y descubrir sus notas naturales, su origeny el perfil que define este café.</p>
+                    <div class="category-header">
+                        <h2 class="category-title">Café Solo</h2>
+                    </div>
+                    <div class="items-grid">
+                        
+                        <div class="item-card">
+                            <div class="item-main">
+                                
+                                <div class="item-details">
+                                    <div class="item-title-row">
+                                        <h4 class="item-title">Espresso Doble 60ml</h4>
+                                        <span class="item-price">$4.000</span>
+                                    </div>
+                                    <p class="item-description">Extracción pura e intensa de origen seleccionado.</p>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <div class="item-card">
+                            <div class="item-main">
+                                
+                                <div class="item-details">
+                                    <div class="item-title-row">
+                                        <h4 class="item-title">Americano 180ml</h4>
+                                        <span class="item-price">$4.500</span>
+                                    </div>
+                                    <p class="item-description">Doble espresso + agua caliente filtrada.</p>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    
+                    </div>
+                </section><section class="category-section" id="cafe-con-leche">
+                    
+                    <div class="category-header">
+                        <h2 class="category-title">Café con Leche</h2>
+                    </div>
+                    <div class="items-grid">
+                        
+                        <div class="item-card">
+                            <div class="item-main">
+                                
+                                <div class="item-details">
+                                    <div class="item-title-row">
+                                        <h4 class="item-title">Macchiato 90ml (S)</h4>
+                                        <span class="item-price">$4.500</span>
+                                    </div>
+                                    <p class="item-description">Doble espresso manchado con una sutil capa de espuma de leche.</p>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <div class="item-card">
+                            <div class="item-main">
+                                
+                                <div class="item-details">
+                                    <div class="item-title-row">
+                                        <h4 class="item-title">Cortadito 130ml (S)</h4>
+                                        <span class="item-price">$4.200</span>
+                                    </div>
+                                    <p class="item-description">Espresso simple con leche texturizada, servido en el clásico vasito de vidrio.</p>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <div class="item-card">
+                            <div class="item-main">
+                                
+                                <div class="item-details">
+                                    <div class="item-title-row">
+                                        <h4 class="item-title">Magic Australiano 150ml (S)</h4>
+                                        <span class="item-price">$5.200</span>
+                                    </div>
+                                    <p class="item-description">Doble Ristretto con leche texturizada de perfecta microespuma.</p>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <div class="item-card">
+                            <div class="item-main">
+                                
+                                <div class="item-details">
+                                    <div class="item-title-row">
+                                        <h4 class="item-title">Flat White (M)</h4>
+                                        <span class="item-price">$5.000</span>
+                                    </div>
+                                    <p class="item-description">Doble espresso con leche texturizada en taza de 180ml.</p>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <div class="item-card">
+                            <div class="item-main">
+                                
+                                <div class="item-details">
+                                    <div class="item-title-row">
+                                        <h4 class="item-title">Capuchino 190ml (M)</h4>
+                                        <span class="item-price">$4.500</span>
+                                    </div>
+                                    <p class="item-description">Espresso simple con leche texturizada más aireada y espolvoreado de chocolate o canela.</p>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <div class="item-card">
+                            <div class="item-main">
+                                
+                                <div class="item-details">
+                                    <div class="item-title-row">
+                                        <h4 class="item-title">Latte 260ml (L)</h4>
+                                        <span class="item-price">$4.800</span>
+                                    </div>
+                                    <p class="item-description">Espresso simple con abundante leche cremosa texturizada.</p>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <div class="item-card">
+                            <div class="item-main">
+                                
+                                <div class="item-details">
+                                    <div class="item-title-row">
+                                        <h4 class="item-title">Café con Leche 260ml (L)</h4>
+                                        <span class="item-price">$5.200</span>
+                                    </div>
+                                    <p class="item-description">Doble espresso con leche cremosa texturizada.</p>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <div class="item-card">
+                            <div class="item-main">
+                                
+                                <div class="item-details">
+                                    <div class="item-title-row">
+                                        <h4 class="item-title">Mocha 260ml (L)</h4>
+                                        <span class="item-price">$6.000</span>
+                                    </div>
+                                    <p class="item-description">Doble espresso, chocolate fundido premium y leche texturizada.</p>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    
+                    </div>
+                </section><section class="category-section" id="cafe-frio">
+                    
+                    <div class="category-header">
+                        <h2 class="category-title">Café Frío</h2>
+                    </div>
+                    <div class="items-grid">
+                        
+                        <div class="item-card">
+                            <div class="item-main">
+                                
+                                <div class="item-details">
+                                    <div class="item-title-row">
+                                        <h4 class="item-title">Iced Americano</h4>
+                                        <span class="item-price">$5.000</span>
+                                    </div>
+                                    <p class="item-description">Espresso doble servido sobre rocas de hielo y agua.</p>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <div class="item-card">
+                            <div class="item-main">
+                                
+                                <div class="item-details">
+                                    <div class="item-title-row">
+                                        <h4 class="item-title">Iced Flat White</h4>
+                                        <span class="item-price">$5.500</span>
+                                    </div>
+                                    <p class="item-description">Doble espresso batido y enfriado con leche cremosa.</p>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <div class="item-card">
+                            <div class="item-main">
+                                
+                                <div class="item-details">
+                                    <div class="item-title-row">
+                                        <h4 class="item-title">Iced Latte</h4>
+                                        <span class="item-price">$5.000</span>
+                                    </div>
+                                    <p class="item-description">Espresso simple combinado con leche fresca y hielo.</p>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <div class="item-card">
+                            <div class="item-main">
+                                
+                                <div class="item-details">
+                                    <div class="item-title-row">
+                                        <h4 class="item-title">Iced Mocha</h4>
+                                        <span class="item-price">$6.000</span>
+                                    </div>
+                                    <p class="item-description">Simple espresso con cacao fundido, leche y hielo.</p>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    
+                    </div>
+                </section><section class="category-section" id="slow-bar">
+                    
+                    <div class="category-header">
+                        <h2 class="category-title">Slow Bar &amp; Degustación</h2>
+                    </div>
+                    <div class="items-grid">
+                        
+                        <div class="item-card">
+                            <div class="item-main">
+                                
+                                <div class="item-details">
+                                    <div class="item-title-row">
+                                        <h4 class="item-title">Filtrado V60 (Para 1)</h4>
+                                        <span class="item-price">$6.500</span>
+                                    </div>
+                                    <p class="item-description">Filtrado por goteo que destaca las notas florales y ácidas de cada origen.</p>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <div class="item-card">
+                            <div class="item-main">
+                                
+                                <div class="item-details">
+                                    <div class="item-title-row">
+                                        <h4 class="item-title">Filtrado V60 (Para 2)</h4>
+                                        <span class="item-price">$9.000</span>
+                                    </div>
+                                    <p class="item-description">Ideal para compartir en mesa y degustar en diferentes temperaturas.</p>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <div class="item-card">
+                            <div class="item-main">
+                                
+                                <div class="item-details">
+                                    <div class="item-title-row">
+                                        <h4 class="item-title">Degustación X3</h4>
+                                        <span class="item-price">$10.000</span>
+                                    </div>
+                                    <p class="item-description">Tres perfiles icónicos: Espresso + Espresso con Leche + Filtrado del día.</p>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <div class="item-card">
+                            <div class="item-main">
+                                
+                                <div class="item-details">
+                                    <div class="item-title-row">
+                                        <h4 class="item-title">Doble Doppio de Origen</h4>
+                                        <span class="item-price">$10.000</span>
+                                    </div>
+                                    <p class="item-description">Dos espressos dobles preparados a partir de dos granos de orígenes diferentes.</p>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    
+                    </div>
+                </section><section class="category-section" id="otras-infusiones">
+                    
+                    <div class="category-header">
+                        <h2 class="category-title">Otras Infusiones</h2>
+                    </div>
+                    <div class="items-grid">
+                        
+                        <div class="item-card">
+                            <div class="item-main">
+                                
+                                <div class="item-details">
+                                    <div class="item-title-row">
+                                        <h4 class="item-title">Matcha Orgánico</h4>
+                                        <span class="item-price">$6.000</span>
+                                    </div>
+                                    <p class="item-description">Pura hoja de té verde molida, endulzada con miel agroecológica, canela y leche.</p>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <div class="item-card">
+                            <div class="item-main">
+                                
+                                <div class="item-details">
+                                    <div class="item-title-row">
+                                        <h4 class="item-title">Té Orgánico en Hebras 500ml</h4>
+                                        <span class="item-price">$6.000</span>
+                                    </div>
+                                    <p class="item-description">Consulta las variedades seleccionadas del mes.</p>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <div class="item-card">
+                            <div class="item-main">
+                                
+                                <div class="item-details">
+                                    <div class="item-title-row">
+                                        <h4 class="item-title">Té de Hibiscus Frío (400ml)</h4>
+                                        <span class="item-price">$4.000</span>
+                                    </div>
+                                    <p class="item-description">Infusión floral fresca con lavanda silvestre y jengibre fresco. (Jarra de 1L por $7.000)</p>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <div class="item-card">
+                            <div class="item-main">
+                                
+                                <div class="item-details">
+                                    <div class="item-title-row">
+                                        <h4 class="item-title">Limonada de la Casa (400ml)</h4>
+                                        <span class="item-price">$4.800</span>
+                                    </div>
+                                    <p class="item-description">Preparada con cheong (almíbar natural de naranjas y limones) y jengibre fermentado. (Jarra de 1L por $9.500)</p>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    
+                    </div>
+                </section><section class="category-section" id="pasteleria">
+                    
+                    <div class="category-header">
+                        <h2 class="category-title">Pastelería &amp; Laminados</h2>
+                    </div>
+                    <div class="items-grid">
+                        
+                        <div class="item-card">
+                            <div class="item-main">
+                                <div class="item-img-container" style="display: none;"><img class="item-img" src="https://images.unsplash.com/photo-1558961312-50346c0998d7?auto=format&amp;fit=crop&amp;w=150&amp;q=80" alt="Alfajores Singulares" onerror="this.parentElement.style.display='none'"></div>
+                                <div class="item-details">
+                                    <div class="item-title-row">
+                                        <h4 class="item-title">Alfajores Singulares</h4>
+                                        <span class="item-price">$6.000</span>
+                                    </div>
+                                    <p class="item-description">Variedades: Maní y DDL / Coco y DDL / Almendras y Naranja / Chocolate y Frambuesa.</p>
+                                    <div class="badges">
+                            <span class="badge badge-sg">Sin Gluten (SG)</span>
+                            
+                           </div>
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <div class="item-card">
+                            <div class="item-main">
+                                
+                                <div class="item-details">
+                                    <div class="item-title-row">
+                                        <h4 class="item-title">Budín de Banana</h4>
+                                        <span class="item-price">$7.000</span>
+                                    </div>
+                                    <p class="item-description">Estilo australiano. Endulzado con miel pura de abejas, servido tostado con manteca y canela.</p>
+                                    <div class="badges">
+                            <span class="badge badge-sg">Sin Gluten (SG)</span>
+                            
+                           </div>
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <div class="item-card">
+                            <div class="item-main">
+                                
+                                <div class="item-details">
+                                    <div class="item-title-row">
+                                        <h4 class="item-title">Budín de Chocolate y Palta</h4>
+                                        <span class="item-price">$6.000</span>
+                                    </div>
+                                    <p class="item-description">Húmedo, cremoso y con gran aporte de grasas saludables de origen natural.</p>
+                                    <div class="badges">
+                            <span class="badge badge-sg">Sin Gluten (SG)</span>
+                            
+                           </div>
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <div class="item-card">
+                            <div class="item-main">
+                                
+                                <div class="item-details">
+                                    <div class="item-title-row">
+                                        <h4 class="item-title">Snickers Fit (x2)</h4>
+                                        <span class="item-price">$7.500</span>
+                                    </div>
+                                    <p class="item-description">Dátiles jugosos rellenos de pasta de maní, cubiertos en chocolate negro y escamas de sal marina.</p>
+                                    <div class="badges">
+                            <span class="badge badge-sg">Sin Gluten (SG)</span>
+                            <span class="badge badge-vg">Vegano (VG)</span>
+                           </div>
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <div class="item-card">
+                            <div class="item-main">
+                                <div class="item-img-container"><img class="item-img" src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&amp;fit=crop&amp;w=150&amp;q=80" alt="Croissant de Masa Madre" onerror="this.parentElement.style.display='none'"></div>
+                                <div class="item-details">
+                                    <div class="item-title-row">
+                                        <h4 class="item-title">Croissant de Masa Madre</h4>
+                                        <span class="item-price">$5.500</span>
+                                    </div>
+                                    <p class="item-description">Hojaldrado artesanal fermentado lentamente. (+ Manteca y mermelada casera por $1.500)</p>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    
+                    </div>
+                </section><section class="category-section" id="tostones">
+                    
+                    <div class="category-header">
+                        <h2 class="category-title">Tostones &amp; Platos Salados</h2>
+                    </div>
+                    <div class="items-grid">
+                        
+                        <div class="item-card">
+                            <div class="item-main">
+                                <div class="item-img-container"><img class="item-img" src="https://images.unsplash.com/photo-1541532713592-79a0317b6b77?auto=format&amp;fit=crop&amp;w=150&amp;q=80" alt="Tostón de Palta" onerror="this.parentElement.style.display='none'"></div>
+                                <div class="item-details">
+                                    <div class="item-title-row">
+                                        <h4 class="item-title">Tostón de Palta</h4>
+                                        <span class="item-price">$12.000</span>
+                                    </div>
+                                    <p class="item-description">Abundante palta fresca machacada con dos huevos revueltos de campo y aceite de oliva extra virgen.</p>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <div class="item-card">
+                            <div class="item-main">
+                                
+                                <div class="item-details">
+                                    <div class="item-title-row">
+                                        <h4 class="item-title">Huevos de Oro</h4>
+                                        <span class="item-price">$10.000</span>
+                                    </div>
+                                    <p class="item-description">Pan tostado, manteca de pastura, dos huevos revueltos cremosos y un toque de miel silvestre con escamas de sal marina.</p>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <div class="item-card">
+                            <div class="item-main">
+                                
+                                <div class="item-details">
+                                    <div class="item-title-row">
+                                        <h4 class="item-title">Sabor de Hongos</h4>
+                                        <span class="item-price">$11.500</span>
+                                    </div>
+                                    <p class="item-description">Untable casero de hongos de pino y portobello, nueces crocantes, queso de cabra desgranado y ciboulette fresco.</p>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <div class="item-card">
+                            <div class="item-main">
+                                
+                                <div class="item-details">
+                                    <div class="item-title-row">
+                                        <h4 class="item-title">Cajú &amp; Palta</h4>
+                                        <span class="item-price">$10.000</span>
+                                    </div>
+                                    <p class="item-description">Untable de castañas de cajú activadas, palta laminada y tomates cherry asados.</p>
+                                    <div class="badges">
+                            <span class="badge badge-sg">Sin Gluten (SG)</span>
+                            <span class="badge badge-vg">Vegano (VG)</span>
+                           </div>
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <div class="item-card">
+                            <div class="item-main">
+                                <div class="item-img-container"><img class="item-img" src="https://images.unsplash.com/photo-1528735602780-2552fd46c7af?auto=format&amp;fit=crop&amp;w=150&amp;q=80" alt="Sándwich Don Carlos" onerror="this.parentElement.style.display='none'"></div>
+                                <div class="item-details">
+                                    <div class="item-title-row">
+                                        <h4 class="item-title">Sándwich Don Carlos</h4>
+                                        <span class="item-price">$13.000</span>
+                                    </div>
+                                    <p class="item-description">Pan de campo crujiente, manteca, jamón cocido natural premium, queso gruyere y mozzarella fundida. Servido con papitas de la casa.</p>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <div class="item-card">
+                            <div class="item-main">
+                                
+                                <div class="item-details">
+                                    <div class="item-title-row">
+                                        <h4 class="item-title">Sándwich Coreano</h4>
+                                        <span class="item-price">$14.000</span>
+                                    </div>
+                                    <p class="item-description">Pan de campo tostado, espinacas frescas, queso gruyere, queso muzzarela y kimchi. Sale con papitas.</p>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    
+                    </div>
+                </section></main>
+
+        <footer id="main-footer"><p>Todos nuestros platos se preparan al momento. Por favor, avísanos si tienes alguna alergia alimentaria.</p><p style="margin-top: 15px; font-weight: bold; letter-spacing: 0.1em; color: var(--primary-color);">© 2026 ULURU - Alimentación Consciente</p></footer>
+    </div>
+
+    <div id="toast">¡Carta actualizada correctamente!</div>
+
+    <!-- DATOS DE LA CARTA (JSON EDITABLE) -->
+    <script id="menu-data">
+        const MENU_DATA = {
+    "store": {
+        "name": "ULURU",
+        "tagline": "CAFÉ & COCINA CONSCIENTE",
+        "description": "ULURU es más que un café: es un estilo de vida basado en el equilibrio, el respeto y las elecciones conscientes. Inspirados en la naturaleza y sus orígenes, trabajamos con ingredientes nobles: huevos de gallinas libres, fermentos vivos, harinas con valor nutricional y productos sin azúcares añadidos ni aceites inflamatorios.",
+        "footer": "Todos nuestros platos se preparan al momento. Por favor, avísanos si tienes alguna alergia alimentaria."
+    },
+    "categories": [
+        {
+            "name": "Combos",
+            "id": "combos",
+            "items": [
+                {
+                    "name": "Clásico de Campo",
+                    "price": "$11.000",
+                    "description": "Infusión + tostadas con manteca o queso crema y mermelada casera o dulce de leche.",
+                    "image": "https://images.unsplash.com/photo-1533089860891-a7c6f0a88666?auto=format&fit=crop&w=150&q=80",
+                    "isSG": false,
+                    "isVG": false
+                },
+                {
+                    "name": "Gulero",
+                    "price": "$11.000",
+                    "description": "Infusión + budín de pastelería consciente a elección.",
+                    "image": "https://images.unsplash.com/photo-1607958996333-41aef7caefaa?auto=format&fit=crop&w=150&q=80",
+                    "isSG": false,
+                    "isVG": false
+                },
+                {
+                    "name": "Argento",
+                    "price": "$11.500",
+                    "description": "Infusión + dos medialunas de masa madre premium.",
+                    "image": "https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=150&q=80",
+                    "isSG": false,
+                    "isVG": false
+                },
+                {
+                    "name": "Ulurense",
+                    "price": "$17.000",
+                    "description": "Infusión + tostón de palta fresca y huevo de campo.",
+                    "image": "https://images.unsplash.com/photo-1541532713592-79a0317b6b77?auto=format&fit=crop&w=150&q=80",
+                    "isSG": false,
+                    "isVG": false
+                }
+            ]
+        },
+        {
+            "name": "Café Solo",
+            "id": "cafe-solo",
+            "description": "Seleccionamos uno de los mejores tostadores de café de Argentina y lo preparamos cuidadosamente para que cada taza exprese su verdadero carácter. Te invitamos a probarlo sin endulzar y descubrir sus notas naturales, su origeny el perfil que define este café.",
+            "items": [
+                {
+                    "name": "Espresso Doble 60ml",
+                    "price": "$4.000",
+                    "description": "Extracción pura e intensa de origen seleccionado.",
+                    "image": "",
+                    "isSG": false,
+                    "isVG": false
+                },
+                {
+                    "name": "Americano 180ml",
+                    "price": "$4.500",
+                    "description": "Doble espresso + agua caliente filtrada.",
+                    "image": "",
+                    "isSG": false,
+                    "isVG": false
+                }
+            ]
+        },
+        {
+            "name": "Café con Leche",
+            "id": "cafe-con-leche",
+            "items": [
+                {
+                    "name": "Macchiato 90ml (S)",
+                    "price": "$4.500",
+                    "description": "Doble espresso manchado con una sutil capa de espuma de leche.",
+                    "image": "",
+                    "isSG": false,
+                    "isVG": false
+                },
+                {
+                    "name": "Cortadito 130ml (S)",
+                    "price": "$4.200",
+                    "description": "Espresso simple con leche texturizada, servido en el clásico vasito de vidrio.",
+                    "image": "",
+                    "isSG": false,
+                    "isVG": false
+                },
+                {
+                    "name": "Magic Australiano 150ml (S)",
+                    "price": "$5.200",
+                    "description": "Doble Ristretto con leche texturizada de perfecta microespuma.",
+                    "image": "",
+                    "isSG": false,
+                    "isVG": false
+                },
+                {
+                    "name": "Flat White (M)",
+                    "price": "$5.000",
+                    "description": "Doble espresso con leche texturizada en taza de 180ml.",
+                    "image": "",
+                    "isSG": false,
+                    "isVG": false
+                },
+                {
+                    "name": "Capuchino 190ml (M)",
+                    "price": "$4.500",
+                    "description": "Espresso simple con leche texturizada más aireada y espolvoreado de chocolate o canela.",
+                    "image": "",
+                    "isSG": false,
+                    "isVG": false
+                },
+                {
+                    "name": "Latte 260ml (L)",
+                    "price": "$4.800",
+                    "description": "Espresso simple con abundante leche cremosa texturizada.",
+                    "image": "",
+                    "isSG": false,
+                    "isVG": false
+                },
+                {
+                    "name": "Café con Leche 260ml (L)",
+                    "price": "$5.200",
+                    "description": "Doble espresso con leche cremosa texturizada.",
+                    "image": "",
+                    "isSG": false,
+                    "isVG": false
+                },
+                {
+                    "name": "Mocha 260ml (L)",
+                    "price": "$6.000",
+                    "description": "Doble espresso, chocolate fundido premium y leche texturizada.",
+                    "image": "",
+                    "isSG": false,
+                    "isVG": false
+                }
+            ]
+        },
+        {
+            "name": "Café Frío",
+            "id": "cafe-frio",
+            "items": [
+                {
+                    "name": "Iced Americano",
+                    "price": "$5.000",
+                    "description": "Espresso doble servido sobre rocas de hielo y agua.",
+                    "image": "",
+                    "isSG": false,
+                    "isVG": false
+                },
+                {
+                    "name": "Iced Flat White",
+                    "price": "$5.500",
+                    "description": "Doble espresso batido y enfriado con leche cremosa.",
+                    "image": "",
+                    "isSG": false,
+                    "isVG": false
+                },
+                {
+                    "name": "Iced Latte",
+                    "price": "$5.000",
+                    "description": "Espresso simple combinado con leche fresca y hielo.",
+                    "image": "",
+                    "isSG": false,
+                    "isVG": false
+                },
+                {
+                    "name": "Iced Mocha",
+                    "price": "$6.000",
+                    "description": "Simple espresso con cacao fundido, leche y hielo.",
+                    "image": "",
+                    "isSG": false,
+                    "isVG": false
+                }
+            ]
+        },
+        {
+            "name": "Slow Bar & Degustación",
+            "id": "slow-bar",
+            "items": [
+                {
+                    "name": "Filtrado V60 (Para 1)",
+                    "price": "$6.500",
+                    "description": "Filtrado por goteo que destaca las notas florales y ácidas de cada origen.",
+                    "image": "",
+                    "isSG": false,
+                    "isVG": false
+                },
+                {
+                    "name": "Filtrado V60 (Para 2)",
+                    "price": "$9.000",
+                    "description": "Ideal para compartir en mesa y degustar en diferentes temperaturas.",
+                    "image": "",
+                    "isSG": false,
+                    "isVG": false
+                },
+                {
+                    "name": "Degustación X3",
+                    "price": "$10.000",
+                    "description": "Tres perfiles icónicos: Espresso + Espresso con Leche + Filtrado del día.",
+                    "image": "",
+                    "isSG": false,
+                    "isVG": false
+                },
+                {
+                    "name": "Doble Doppio de Origen",
+                    "price": "$10.000",
+                    "description": "Dos espressos dobles preparados a partir de dos granos de orígenes diferentes.",
+                    "image": "",
+                    "isSG": false,
+                    "isVG": false
+                }
+            ]
+        },
+        {
+            "name": "Otras Infusiones",
+            "id": "otras-infusiones",
+            "items": [
+                {
+                    "name": "Matcha Orgánico",
+                    "price": "$6.000",
+                    "description": "Pura hoja de té verde molida, endulzada con miel agroecológica, canela y leche.",
+                    "image": "",
+                    "isSG": false,
+                    "isVG": false
+                },
+                {
+                    "name": "Té Orgánico en Hebras 500ml",
+                    "price": "$6.000",
+                    "description": "Consulta las variedades seleccionadas del mes.",
+                    "image": "",
+                    "isSG": false,
+                    "isVG": false
+                },
+                {
+                    "name": "Té de Hibiscus Frío (400ml)",
+                    "price": "$4.000",
+                    "description": "Infusión floral fresca con lavanda silvestre y jengibre fresco. (Jarra de 1L por $7.000)",
+                    "image": "",
+                    "isSG": false,
+                    "isVG": false
+                },
+                {
+                    "name": "Limonada de la Casa (400ml)",
+                    "price": "$4.800",
+                    "description": "Preparada con cheong (almíbar natural de naranjas y limones) y jengibre fermentado. (Jarra de 1L por $9.500)",
+                    "image": "",
+                    "isSG": false,
+                    "isVG": false
+                }
+            ]
+        },
+        {
+            "name": "Pastelería & Laminados",
+            "id": "pasteleria",
+            "items": [
+                {
+                    "name": "Alfajores Singulares",
+                    "price": "$6.000",
+                    "description": "Variedades: Maní y DDL / Coco y DDL / Almendras y Naranja / Chocolate y Frambuesa.",
+                    "image": "https://images.unsplash.com/photo-1558961312-50346c0998d7?auto=format&fit=crop&w=150&q=80",
+                    "isSG": true,
+                    "isVG": false
+                },
+                {
+                    "name": "Budín de Banana",
+                    "price": "$7.000",
+                    "description": "Estilo australiano. Endulzado con miel pura de abejas, servido tostado con manteca y canela.",
+                    "image": "",
+                    "isSG": true,
+                    "isVG": false
+                },
+                {
+                    "name": "Budín de Chocolate y Palta",
+                    "price": "$6.000",
+                    "description": "Húmedo, cremoso y con gran aporte de grasas saludables de origen natural.",
+                    "image": "",
+                    "isSG": true,
+                    "isVG": false
+                },
+                {
+                    "name": "Snickers Fit (x2)",
+                    "price": "$7.500",
+                    "description": "Dátiles jugosos rellenos de pasta de maní, cubiertos en chocolate negro y escamas de sal marina.",
+                    "image": "",
+                    "isSG": true,
+                    "isVG": true
+                },
+                {
+                    "name": "Croissant de Masa Madre",
+                    "price": "$5.500",
+                    "description": "Hojaldrado artesanal fermentado lentamente. (+ Manteca y mermelada casera por $1.500)",
+                    "image": "https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=150&q=80",
+                    "isSG": false,
+                    "isVG": false
+                }
+            ]
+        },
+        {
+            "name": "Tostones & Platos Salados",
+            "id": "tostones",
+            "items": [
+                {
+                    "name": "Tostón de Palta",
+                    "price": "$12.000",
+                    "description": "Abundante palta fresca machacada con dos huevos revueltos de campo y aceite de oliva extra virgen.",
+                    "image": "https://images.unsplash.com/photo-1541532713592-79a0317b6b77?auto=format&fit=crop&w=150&q=80",
+                    "isSG": false,
+                    "isVG": false
+                },
+                {
+                    "name": "Huevos de Oro",
+                    "price": "$10.000",
+                    "description": "Pan tostado, manteca de pastura, dos huevos revueltos cremosos y un toque de miel silvestre con escamas de sal marina.",
+                    "image": "",
+                    "isSG": false,
+                    "isVG": false
+                },
+                {
+                    "name": "Sabor de Hongos",
+                    "price": "$11.500",
+                    "description": "Untable casero de hongos de pino y portobello, nueces crocantes, queso de cabra desgranado y ciboulette fresco.",
+                    "image": "",
+                    "isSG": false,
+                    "isVG": false
+                },
+                {
+                    "name": "Cajú & Palta",
+                    "price": "$10.000",
+                    "description": "Untable de castañas de cajú activadas, palta laminada y tomates cherry asados.",
+                    "image": "",
+                    "isSG": true,
+                    "isVG": true
+                },
+                {
+                    "name": "Sándwich Don Carlos",
+                    "price": "$13.000",
+                    "description": "Pan de campo crujiente, manteca, jamón cocido natural premium, queso gruyere y mozzarella fundida. Servido con papitas de la casa.",
+                    "image": "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?auto=format&fit=crop&w=150&q=80",
+                    "isSG": false,
+                    "isVG": false
+                },
+                {
+                    "name": "Sándwich Coreano",
+                    "price": "$14.000",
+                    "description": "Pan de campo tostado, espinacas frescas, queso gruyere, queso muzzarela y kimchi. Sale con papitas.",
+                    "image": "",
+                    "isSG": false,
+                    "isVG": false
+                }
+            ]
+        }
+    ]
+};
+
+        // Renderizado Dinámico
+        function renderMenu(data) {
+            // Render Header (Reemplazado el título por el logo con fallback de texto)
+            const header = document.getElementById('main-header');
+            header.innerHTML = `
+                <div class="logo-container">
+                    <img src="logo-uluru.png" alt="ULURU Logo" class="brand-logo-img" onerror="this.style.display='none'; document.getElementById('brand-text-fallback').style.display='block';">
+                    <div id="brand-text-fallback" class="brand-logo" style="display:none;">${data.store.name}</div>
+                </div>
+                <div class="brand-subtitle">${data.store.tagline}</div>
+                <p class="brand-description">${data.store.description}</p>
+            `;
+
+            // Render Nav
+            const nav = document.getElementById('cat-nav');
+            nav.innerHTML = '';
+            data.categories.forEach((cat, index) => {
+                const btn = document.createElement('button');
+                btn.className = `nav-btn ${index === 0 ? 'active' : ''}`;
+                btn.innerText = cat.name;
+                btn.onclick = () => {
+                    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    document.getElementById(cat.id).scrollIntoView({ behavior: 'smooth' });
+                };
+                nav.appendChild(btn);
+            });
+
+            // Render Content
+            const content = document.getElementById('menu-content');
+            content.innerHTML = '';
+
+            data.categories.forEach(cat => {
+                const section = document.createElement('section');
+                section.className = 'category-section';
+                section.id = cat.id;
+
+                let itemsHTML = '';
+                cat.items.forEach(item => {
+                    const imgHTML = item.image 
+                        ? `<div class="item-img-container"><img class="item-img" src="${item.image}" alt="${item.name}" onerror="this.parentElement.style.display='none'"></div>` 
+                        : '';
+
+                    const badgesHTML = (item.isSG || item.isVG) 
+                        ? `<div class="badges">
+                            ${item.isSG ? '<span class="badge badge-sg">Sin Gluten (SG)</span>' : ''}
+                            ${item.isVG ? '<span class="badge badge-vg">Vegano (VG)</span>' : ''}
+                           </div>` 
+                        : '';
+
+                    itemsHTML += `
+                        <div class="item-card">
+                            <div class="item-main">
+                                ${imgHTML}
+                                <div class="item-details">
+                                    <div class="item-title-row">
+                                        <h4 class="item-title">${item.name}</h4>
+                                        <span class="item-price">${item.price}</span>
+                                    </div>
+                                    <p class="item-description">${item.description}</p>
+                                    ${badgesHTML}
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+
+                // Cambiado para renderizar la descripción como un texto destacado "por encima" del título del bloque
+                section.innerHTML = `
+                    ${cat.description ? `<p class="category-intro-text">${cat.description}</p>` : ''}
+                    <div class="category-header">
+                        <h2 class="category-title">${cat.name}</h2>
+                    </div>
+                    <div class="items-grid">
+                        ${itemsHTML}
+                    </div>
+                `;
+                content.appendChild(section);
+            });
+
+            // Render Footer
+            const footer = document.getElementById('main-footer');
+            footer.innerHTML = `<p>${data.store.footer}</p><p style="margin-top: 15px; font-weight: bold; letter-spacing: 0.1em; color: var(--primary-color);">&copy; ${new Date().getFullYear()} ULURU - Alimentación Consciente</p>`;
+        }
+
+        // Inicialización
+        window.onload = function() {
+            renderMenu(MENU_DATA);
+            document.getElementById('json-textarea').value = JSON.stringify(MENU_DATA, null, 4);
+        };
+
+        // Funciones del Editor
+        function toggleEditor() {
+            const panel = document.getElementById('editor-panel');
+            panel.classList.toggle('open');
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.innerText = message;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        function applyChanges() {
+            try {
+                const text = document.getElementById('json-textarea').value;
+                const updatedData = JSON.parse(text);
+                renderMenu(updatedData);
+                showToast("¡La carta se ha actualizado correctamente!");
+            } catch (e) {
+                showToast("Error de sintaxis en el JSON. Verifica los cambios.");
+                console.error(e);
+            }
+        }
+
+        // Generar un archivo HTML totalmente limpio para exportar (SIN editor para los clientes)
+        function exportHTML() {
+            try {
+                const updatedText = document.getElementById('json-textarea').value;
+                JSON.parse(updatedText); // Validar estructura JSON
+
+                // Clonar de forma virtual el DOM actual
+                const parser = new DOMParser();
+                const docClone = parser.parseFromString(document.documentElement.outerHTML, 'text/html');
+                
+                // 1. ELIMINAR LOS ELEMENTOS DEL EDITOR PARA EL CLIENTE FINAL
+                const toggleBtn = docClone.getElementById('editor-toggle');
+                const panel = docClone.getElementById('editor-panel');
+                if (toggleBtn) toggleBtn.remove();
+                if (panel) panel.remove();
+                
+                // 2. Insertar los datos actualizados dentro de la variable del script en el clon
+                const scripts = docClone.querySelectorAll('script');
+                scripts.forEach(script => {
+                    if (script.innerHTML.includes('const MENU_DATA =')) {
+                        const regex = /const MENU_DATA = \{[\s\S]*?\};/;
+                        script.innerHTML = script.innerHTML.replace(regex, `const MENU_DATA = ${updatedText};`);
+                    }
+                });
+
+                // 3. Crear el string final del HTML limpio
+                const cleanHTML = '<!DOCTYPE html>\n' + docClone.documentElement.outerHTML;
+
+                // 4. Descargar el archivo ya con el nombre "index.html" listo para GitHub
+                const blob = new Blob([cleanHTML], { type: 'text/html' });
+                const a = document.createElement('a');
+                a.href = URL.createObjectURL(blob);
+                a.download = 'index.html'; 
+                a.click();
+                showToast("¡Archivo limpio 'index.html' descargado con éxito!");
+            } catch (e) {
+                showToast("No se pudo exportar. Asegúrate de que el JSON no tenga errores.");
+                console.error(e);
+            }
+        }
+    </script>
+
+</body></html>
